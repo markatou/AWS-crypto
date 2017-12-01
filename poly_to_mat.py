@@ -52,7 +52,7 @@ def poly_to_mat():
     for i in range(len(output_mat)):
         for k in range(m/2 - 1, i, -1):
             assert(output_mat[i][k] == 0)
-            output_mat[i][k] += coeffs[k]
+            output_mat[i][k] -= coeffs[k]
             
     return output_mat
         
