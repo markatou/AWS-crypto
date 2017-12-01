@@ -54,3 +54,24 @@ real	49m47.637s
 user	33m11.564s
 sys	0m0.180s
 We have 100 dimensions
+How long does SVP take for different matrices sizes\n
+We have 10 dimensions
+We have 15 dimensions
+We have 20 dimensions
+We have 25 dimensions
+We have 30 dimensions
+We have 35 dimensions
+We have 40 dimensions
+We have 45 dimensions
+We have 50 dimensions
+We have 55 dimensions
+We have 60 dimensions
+We have 65 dimensions
+./script.sh: line 3: 12054 Done                    ./fplll/fplll/latticegen u $i 10
+     12055 Terminated              | ./fplll/fplll/fplll -a svp
+
+real	47m34.464s
+user	31m23.588s
+sys	0m0.224s
+We have 70 dimensions
+We have 75 dimensions
