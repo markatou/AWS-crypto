@@ -71,7 +71,7 @@ def poly_to_mat():
         if line == "  }\n":
             break
         line = line[8:]
-        b_vec.append(float(line))
+        b_vec.append(int(round(float(line))))
 
     f.close()
 
@@ -91,7 +91,7 @@ def create_challenge_file():
         for elem in row:
             f.write(str(elem) + " ")
         f.write("]")
-    f.write("] ")
+    f.write("]")
 
     f.write("[")
     for elem in b:
