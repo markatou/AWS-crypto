@@ -1,4 +1,4 @@
-PATH = "chall_0000_toy.txt"  # Path to challenge file
+PATH = "chall_000_00.txt"  # Path to challenge file
 # PATH = "chall_0457_toy.txt"
 ## This file contains the output of the parser that came
 ## with the original challenge files.
@@ -101,4 +101,4 @@ def create_challenge_file():
 
     f.close()
 
-# create_challenge_file()
+create_challenge_file()
