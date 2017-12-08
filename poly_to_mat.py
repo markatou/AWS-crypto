@@ -90,16 +90,14 @@ def poly_to_mat():
             if (len(b_vec) == 0):
                 b_vec = b_current
             else:
-                for i in range(len(b_vec)):
-                    b_vec[i] += b_current[i]
-            assert(len(b_vec) == m/2)
+                for elem in b_current:
+                    b_vec.append(elem)
 
     f.close()
 
     for i in range(len(b_vec)):
-        b_vec[i]= int(round(b_vec[i]))
+        b_vec[i]= int(round(float(b_vec[i])))
 
-    assert(len(a_mat) == len(b_vec))
     return a_mat, b_vec
 
 
@@ -122,4 +120,6 @@ def create_challenge_file():
 
     f.close()
 
-# create_challenge_file()
+
+
+create_challenge_file()
