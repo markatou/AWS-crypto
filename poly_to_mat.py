@@ -75,7 +75,7 @@ def poly_to_mat():
                 if line == "  }\n":
                     break
                 line = line[8:]
-                b_current.append(int(round(float(line))))
+                b_current.append(line)
 
             ## Append each row of a_curr to the corresponding row of a_mat
             if (len(a_mat) == 0):
@@ -95,6 +95,9 @@ def poly_to_mat():
             assert(len(b_vec) == m/2)
 
     f.close()
+
+    for i in range(len(b_vec)):
+        b_vec[i]= int(round(b_vec[i]))
 
     assert(len(a_mat) == len(b_vec))
     return a_mat, b_vec
@@ -119,4 +122,4 @@ def create_challenge_file():
 
     f.close()
 
-create_challenge_file()
+# create_challenge_file()
