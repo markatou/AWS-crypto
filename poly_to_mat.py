@@ -17,23 +17,27 @@ def poly_to_mat():
     ## Now, let's build the matrix
     a_mat = []   ## This is the matrix representation of multiplication
                  ## by a mod x^(m/2) + 1
-     ## Now, let's create a vector of length m/2 that has the coefficients of b
+                 ## This matrix will have m/2 rows and (num samples) * m/2 columns
+    
+    ## This is a vector of length m/2 that has the coefficients of b
+    ## We will sum all of our b samples to get this vector
     b_vec = []
-
-    start_row = 0
 
     f = open(PATH, 'r')
     ## First, parse the file to get the coefficients of the polynomial
     line = f.readline()
     while line:
         line = f.readline()
-        if line == "samples {\n":  ## Start of 'a' polynomial
-            coeffs = []  ## This will store our coefficients
+        if line == "samples {\n":  ## Start of 'a' polynomial            
             f.readline()  ## a {
             line = f.readline()  ## m:
             line = line[7:]  ## get rid of the ____m:_
             m = int(line)
             f.readline()  ## q:
+
+            coeffs = []  ## This will store our coefficients
+            a_current = []   ## square matrix that represents our current sample polynomial
+            b_current = []   ## vector that represents our current b
 
             ## Now, we start looping over coefficient lines
             ## Currently hardcoded for a power of 2 cyclotomic
@@ -50,14 +54,14 @@ def poly_to_mat():
                     cur_row.append(coeffs[j])
                 for k in range(i+1, m/2):  ## pad with zeros
                     cur_row.append(0)
-                a_mat.append(cur_row)
+                a_current.append(cur_row)
                 
             ## Build the top diagonal by continuing the pattern
             ## but subtracting each row from the existing matrix
-            for i in range(start_row, start_row + m/2):
-                for k in range(m/2 - 1, i - start_row, -1):
-                    assert(a_mat[i][k] == 0)
-                    a_mat[i][k] -= coeffs[k]
+            for i in range(m/2):
+                for k in range(m/2 - 1, i, -1):
+                    assert(a_current[i][k] == 0)
+                    a_current[i][k] -= coeffs[k]
 
             ## We've build the matrix for the polynomial a
 
@@ -66,16 +70,30 @@ def poly_to_mat():
             f.readline()  ## m:
             f.readline()  ## q:
 
-            for i in range(start_row, start_row + m/2):
+            for i in range(m/2):
                 line = f.readline()
                 if line == "  }\n":
                     break
                 line = line[8:]
-                b_vec.append(int(round(float(line))))
+                b_current.append(int(round(float(line))))
 
-            start_row += m/2
-##            while (len(b_vec) < m/2):
-##                b_vec.append(0)
+            ## Append each row of a_curr to the corresponding row of a_mat
+            if (len(a_mat) == 0):
+                a_mat = a_current
+            else:
+                for i in range(len(a_mat)):
+                    for elem in a_current[i]:
+                        a_mat[i].append(elem)
+            assert(len(a_mat) == m/2)
+
+            ## Add each element of b_current to b_vec
+            if (len(b_vec) == 0):
+                b_vec = b_current
+            else:
+                for i in range(len(b_vec)):
+                    b_vec[i] += b_current[i]
+            assert(len(b_vec) == m/2)
+
     f.close()
 
     assert(len(a_mat) == len(b_vec))
