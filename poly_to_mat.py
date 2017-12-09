@@ -1,4 +1,4 @@
-PATH = "chall_000_00.txt"  # Path to challenge file
+PATH = "chall_000_04.txt"  # Path to challenge file
 # PATH = "chall_0457_toy.txt"
 ## This file contains the output of the parser that came
 ## with the original challenge files.
