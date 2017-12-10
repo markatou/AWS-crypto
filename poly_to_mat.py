@@ -1,9 +1,34 @@
-PATH = "chall_000_04.txt"  # Path to challenge file
-# PATH = "chall_0457_toy.txt"
+PATH = "chall_000_00.txt"  # Path to challenge file
+S_PATH = "secret_457_00.txt"
+
 ## This file contains the output of the parser that came
 ## with the original challenge files.
 
 OUTPUT = "my_challenge.txt"
+S_OUTPUT = "my_secret.txt"
+
+rec = False
+
+"""
+Takes in a matrix and returns its transpose.
+"""
+def transpose(A):
+	out = []
+	for row in A:
+		assert(len(row) == len(A))
+		out.append([])
+
+	assert(len(out) == len(A))
+	for i in range(len(A)):  ## all rows
+		for j in range(len(A[i])):  ## for each row
+			out[j].append(A[i][j])  ## put this element in the column of out
+
+	if not rec:
+		rec = True
+		assert(A == transpose(out))
+
+	return out
+
 
 """
 Currently hardcoded for challenge 0000 toy.
@@ -33,7 +58,9 @@ def poly_to_mat():
             line = f.readline()  ## m:
             line = line[7:]  ## get rid of the ____m:_
             m = int(line)
-            f.readline()  ## q:
+            line = f.readline()  ## q:
+            line = line[7:]
+            q = float(line)
 
             coeffs = []  ## This will store our coefficients
             a_current = []   ## square matrix that represents our current sample polynomial
@@ -43,7 +70,8 @@ def poly_to_mat():
             ## Currently hardcoded for a power of 2 cyclotomic
             for i in range(m/2):
                 line = f.readline()
-                line = line[8:]  ## remove ____xs:_  
+                line = line[8:]  ## remove ____xs:_ 
+                assert(abs(int(line)) < q/2.0) 
                 coeffs.append(int(line))
 
             ## Let's first build the bottom diagonal
@@ -75,7 +103,10 @@ def poly_to_mat():
                 if line == "  }\n":
                     break
                 line = line[8:]
-                b_current.append(line)
+                assert(abs(float(line)) < q/2) 
+                b_current.append(float(line))
+
+            a_current = transpose(a_current)
 
             ## Append each row of a_curr to the corresponding row of a_mat
             if (len(a_mat) == 0):
@@ -90,13 +121,13 @@ def poly_to_mat():
             if (len(b_vec) == 0):
                 b_vec = b_current
             else:
-                for elem in b_current:
-                    b_vec.append(elem)
-
+                for i in range(len(b_current)):
+                    b_vec.append(b_current[i])
+            
     f.close()
 
     for i in range(len(b_vec)):
-        b_vec[i]= int(round(float(b_vec[i])))
+        b_vec[i] = int(round(float(b_vec[i])))
 
     return a_mat, b_vec
 
@@ -121,5 +152,41 @@ def create_challenge_file():
     f.close()
 
 
+def create_secret_file():
+    f = open(S_PATH, 'r')
+    line = f.readline()
 
-create_challenge_file()
+    coeffs = []
+    
+    while line:
+        line = f.readline()
+        if line == "s {\n":
+            ## start of the secret
+            line = f.readline()  # m:
+            line = line[5:]  ## get rid of the __m:_
+            m = int(line)
+            f.readline()  # q:
+            for i in range(m/2):
+                line = f.readline()
+                if line == "  }\n":
+                    break
+                line = line[6:]  ## get rid of __xs:_
+                coeffs.append(int(line))
+            break
+    f.close()
+    
+    f = open(S_OUTPUT, 'w')
+
+    f.write("[")
+    for elem in coeffs:
+        f.write(str(elem) + " ")
+    f.write("]")
+
+    f.close()
+
+
+def main():
+    # create_challenge_file()
+    create_secret_file()
+
+main()
