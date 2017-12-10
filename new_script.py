@@ -1,4 +1,4 @@
-PATH = "chall_457_00.txt"
+PATH = "chall_000_04.txt"
 
 OUTPUT = "my_challenge.txt"
 
@@ -34,7 +34,7 @@ def parse_input_file():
             for i in range(m / 2):
                 line = f.readline()
                 line = line[8:]  # remove ____xs:_
-                assert(abs(int(line)) < q / 2.0)
+                assert(abs(int(line)) <= q / 2.0)
                 coeffs.append(int(line))
 
             # Let's start by building the upper triangle
