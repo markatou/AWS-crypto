@@ -2,7 +2,7 @@ PATH = "chall_000_03.txt"
 
 OUTPUT = "my_challenge.txt"
 
-MAX_SAMPLES=1
+MAX_SAMPLES=10
 
 def parse_input_file():
     # This is the matrix representation of multiplication
@@ -12,6 +12,9 @@ def parse_input_file():
     a_mat = []
     # This will be a concatenation of all of our b samples
     b_vec = []
+
+    q = -1
+    m = -1
 
     num_samples = 0
     f = open(PATH, 'r')
@@ -94,6 +97,15 @@ def parse_input_file():
 
     for i in range(len(b_vec)):
         b_vec[i] = int(round(float(b_vec[i])))
+
+    assert(m != -1)
+    assert(q != -1)
+    for i in range(len(a_mat)):
+        for j in range(len(a_mat[i])):
+            a_mat[i][j] = a_mat[i][j] % q
+    for i in range(len(b_vec)):
+        b_vec[i] = b_vec[i] % q
+
 
     return a_mat, b_vec
 
