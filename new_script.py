@@ -102,9 +102,9 @@ def parse_input_file():
     assert(q != -1)
     for i in range(len(a_mat)):
         for j in range(len(a_mat[i])):
-            a_mat[i][j] = a_mat[i][j] % q
+            a_mat[i][j] = int(a_mat[i][j] % q)
     for i in range(len(b_vec)):
-        b_vec[i] = b_vec[i] % q
+        b_vec[i] = int(b_vec[i] % q)
 
 
     return a_mat, b_vec
