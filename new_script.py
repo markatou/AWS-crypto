@@ -1,7 +1,8 @@
-PATH = "chall_000_04.txt"
+PATH = "chall_000_03.txt"
 
 OUTPUT = "my_challenge.txt"
 
+MAX_SAMPLES=1
 
 def parse_input_file():
     # This is the matrix representation of multiplication
@@ -12,11 +13,13 @@ def parse_input_file():
     # This will be a concatenation of all of our b samples
     b_vec = []
 
+    num_samples = 0
     f = open(PATH, 'r')
     line = f.readline()
     while line:
         line = f.readline()
         if line == "samples {\n":
+            num_samples += 1
             f.readline()  # a {
             line = f.readline()  # m:
             line = line[7:]  # get rid of the ____m:_
@@ -83,6 +86,8 @@ def parse_input_file():
             else:
                 for i in range(len(b_current)):
                     b_vec.append(b_current[i])
+            if num_samples >= MAX_SAMPLES:
+                break
     f.close()
 
     assert(len(a_mat) == m/2)
