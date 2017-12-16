@@ -1,33 +1,13 @@
 PATH = "chall_000_00.txt"  # Path to challenge file
-S_PATH = "secret_457_00.txt"
+S_PATH = "secret_000_00.txt"
 
 ## This file contains the output of the parser that came
 ## with the original challenge files.
 
 OUTPUT = "my_challenge.txt"
-S_OUTPUT = "my_secret.txt"
+S_OUTPUT = "my_secret.dat"
 
 rec = False
-
-"""
-Takes in a matrix and returns its transpose.
-"""
-def transpose(A):
-	out = []
-	for row in A:
-		assert(len(row) == len(A))
-		out.append([])
-
-	assert(len(out) == len(A))
-	for i in range(len(A)):  ## all rows
-		for j in range(len(A[i])):  ## for each row
-			out[j].append(A[i][j])  ## put this element in the column of out
-
-	if not rec:
-		rec = True
-		assert(A == transpose(out))
-
-	return out
 
 
 """
@@ -171,7 +151,7 @@ def create_secret_file():
                 if line == "  }\n":
                     break
                 line = line[6:]  ## get rid of __xs:_
-                coeffs.append(int(line))
+                coeffs.append(int(int(line) % 769))
             break
     f.close()
     

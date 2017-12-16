@@ -1,9 +1,30 @@
 PATH = "chall_000_00.txt"
 
-OUTPUT_MAT = "my_challenge_matrix.dat"
-OUTPUT_VEC = "my_challenge_vec.dat"
+OUTPUT_MAT = "samples_matrix.dat"
+OUTPUT_VEC = "samples_vector.dat"
 
 MAX_SAMPLES=10
+
+def transpose_mat(A):
+	num_rows = len(A)
+	num_cols = len(A[0])
+	for row in A:
+		assert(len(row) == num_cols)
+
+	Output = []
+	for col in range(num_cols):
+		Output.append([])  ## creat a row for each column of A
+
+	for i in range(num_rows):  # for each row
+		for j in range(num_cols):
+			Output[j].append(A[i][j])
+
+	## Check
+	for i in range(num_cols):
+		for j in range(num_rows):
+			assert(Output[i][j] == A[j][i])
+
+	return Output
 
 def parse_input_file():
     # This is the matrix representation of multiplication
@@ -113,6 +134,9 @@ def parse_input_file():
 
 def create_challenge_file():
     a, b = parse_input_file()
+
+    a = transpose_mat(a)
+
     f = open(OUTPUT_MAT, 'w')
     f.write("[")
     for row in a:
