@@ -14,4 +14,6 @@ do
        	then
 		break
 	fi
+
+	((std_dev++))
 done
