@@ -1,4 +1,4 @@
-PATH = "chall_000_03.txt"
+PATH = "chall_000_00.txt"
 
 OUTPUT = "my_challenge.txt"
 

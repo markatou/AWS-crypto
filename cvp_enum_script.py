@@ -1,9 +1,11 @@
+import sys
+
 PATH = "chall_000_00.txt"
 
 OUTPUT_MAT = "samples_matrix.dat"
 OUTPUT_VEC = "samples_vector.dat"
 
-MAX_SAMPLES=10
+MAX_SAMPLES=3
 
 def transpose_mat(A):
 	num_rows = len(A)
@@ -129,13 +131,13 @@ def parse_input_file():
         b_vec[i] = int(b_vec[i] % q)
 
 
-    return a_mat, b_vec
+    return a_mat, b_vec	
 
 
 def create_challenge_file():
     a, b = parse_input_file()
 
-    a = transpose_mat(a)
+    # a = transpose_mat(a)
 
     f = open(OUTPUT_MAT, 'w')
     f.write("[")
@@ -157,6 +159,9 @@ def create_challenge_file():
 
 
 def main():
+    if (len(sys.argv) > 1):
+        OUTPUT_MAT = sys.argv[1]
+        OUTPUT_VEC = sys.argv[2]
     create_challenge_file()
 
 
