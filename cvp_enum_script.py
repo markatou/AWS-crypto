@@ -53,7 +53,7 @@ def parse_input_file():
             m = int(line)
             line = f.readline()  # q:
             line = line[7:]
-            q = float(line)
+            q = int(line)
 
             coeffs = []  # This will store our coefficients
             a_current = []  # square matrix that represents our current sample polynomial
@@ -130,7 +130,21 @@ def parse_input_file():
     for i in range(len(b_vec)):
         b_vec[i] = int(b_vec[i] % q)
 
+    rows = len(a_mat)
+    assert(rows == m/2)
 
+    cols = len(a_mat[0])
+    for i in range(cols):
+        a_mat.append([])
+        for j in range(cols):
+            if (i != j):
+                a_mat[rows + i].append(0)
+            else:
+                a_mat[rows + i].append(q)
+
+    for row in a_mat:
+        assert(len(row) == cols)
+    assert(len(a_mat) == rows + cols)
     return a_mat, b_vec	
 
 
@@ -143,16 +157,19 @@ def create_challenge_file():
     f.write("[")
     for row in a:
         f.write("[")
-        for elem in row:
-            f.write(str(elem) + " ")
+        f.write(str(row[0]))
+        # for elem in row:
+        for i in range(1, len(row)):
+            f.write(" " + str(row[i]))
         f.write("]\n")
     f.write("]")
     f.close()
 
     f = open(OUTPUT_VEC, 'w')
     f.write("[")
-    for elem in b:
-        f.write(str(elem) + " ")
+    f.write(str(b[0]))
+    for i in range(1, len(row)):
+        f.write(" " + str(row[i]))
     f.write("]")
 
     f.close()

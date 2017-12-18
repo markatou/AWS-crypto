@@ -112,24 +112,24 @@ def poly_to_mat():
     return a_mat, b_vec
 
 
-def create_challenge_file():
+# def create_challenge_file():
 
-    a, b = poly_to_mat()
-    f = open(OUTPUT, 'w')
-    f.write("[")
-    for row in a:
-        f.write("[")
-        for elem in row:
-            f.write(str(elem) + " ")
-        f.write("]")
-    f.write("]")
+#     a, b = poly_to_mat()
+#     f = open(OUTPUT, 'w')
+#     f.write("[")
+#     for row in a:
+#         f.write("[")
+#         for elem in row:
+#             f.write(str(elem) + " ")
+#         f.write("]")
+#     f.write("]")
 
-    f.write("[")
-    for elem in b:
-        f.write(str(elem) + " ")
-    f.write("]")
+#     f.write("[")
+#     for elem in b:
+#         f.write(str(elem) + " ")
+#     f.write("]")
 
-    f.close()
+#     f.close()
 
 
 def create_secret_file():
@@ -145,21 +145,24 @@ def create_secret_file():
             line = f.readline()  # m:
             line = line[5:]  ## get rid of the __m:_
             m = int(line)
-            f.readline()  # q:
+            line = f.readline()  # q:
+            line = line[5:]
+            q = int(line)
             for i in range(m/2):
                 line = f.readline()
                 if line == "  }\n":
                     break
                 line = line[6:]  ## get rid of __xs:_
-                coeffs.append(int(int(line) % 769))
+                coeffs.append(int(int(line) % q))
             break
     f.close()
     
     f = open(S_OUTPUT, 'w')
 
     f.write("[")
-    for elem in coeffs:
-        f.write(str(elem) + " ")
+    f.write(str(coeffs[0]))
+    for i in range(1, len(coeffs)):
+        f.write(" " + str(coeffs[i]))
     f.write("]")
 
     f.close()
