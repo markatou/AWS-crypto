@@ -5,7 +5,7 @@ PATH = "chall_000_00.txt"
 OUTPUT_MAT = "samples_matrix.dat"
 OUTPUT_VEC = "samples_vector.dat"
 
-MAX_SAMPLES=3
+MAX_SAMPLES=2
 
 def transpose_mat(A):
 	num_rows = len(A)
@@ -168,8 +168,8 @@ def create_challenge_file():
     f = open(OUTPUT_VEC, 'w')
     f.write("[")
     f.write(str(b[0]))
-    for i in range(1, len(row)):
-        f.write(" " + str(row[i]))
+    for i in range(1, len(b)):
+        f.write(" " + str(b[i]))
     f.write("]")
 
     f.close()
