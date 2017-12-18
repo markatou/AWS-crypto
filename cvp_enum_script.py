@@ -4,8 +4,10 @@ PATH = "chall_000_00.txt"
 
 OUTPUT_MAT = "samples_matrix.dat"
 OUTPUT_VEC = "samples_vector.dat"
+# OUTPUT_MAT = "test_matrix.txt"
+# OUTPUT_VEC = "test_vector.txt"
 
-MAX_SAMPLES=2
+MAX_SAMPLES=1
 
 def transpose_mat(A):
 	num_rows = len(A)
