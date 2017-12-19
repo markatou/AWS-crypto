@@ -1,4 +1,5 @@
 import sys
+import argparse
 
 PATH = "chall_000_00.txt"
 
@@ -8,8 +9,15 @@ OUTPUT_VEC = "samples_vector.dat"
 # OUTPUT_VEC = "test_vector.txt"
 
 MAX_SAMPLES=2
+TWEAK_FACTOR = 128
 
-TWEAK_FACTOR = 128    ## could it really be that simple?
+def checkPos(v):
+    if not v: 
+        raise argparse.ArgumentTypeError("Argument can't be NoneType")
+    v = int(v)
+    if v <=0:
+        raise argparse.ArgumentTypeError("%s The value has to be a positive integer. " % v)
+    return v
 
 def transpose_mat(A):
 	num_rows = len(A)
@@ -180,10 +188,19 @@ def create_challenge_file():
 
 
 def main():
-    if (len(sys.argv) > 1):
-        OUTPUT_MAT = sys.argv[1]
-        OUTPUT_VEC = sys.argv[2]
+    TWEAK_FACTOR = int(args.t)    ## could it really be that simple?
+    OUTPUT_MAT = str(args.output_matrix)
+    OUTPUT_VEC = str(args.output_vector)
+    SAMPLES = int(args.s)
     create_challenge_file()
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-t", help="The tweak factor", type=checkPos)
+parser.add_argument("-s", help="The number of samples", type=checkPos)
+parser.add_argument("-om", "--output_matrix", help="Output matrix",)
+parser.add_argument("-ov", "--output_vector", help="Output vector",)
+args = parser.parse_args()
+
 
 
 main()
