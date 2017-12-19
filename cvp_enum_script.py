@@ -7,7 +7,9 @@ OUTPUT_VEC = "samples_vector.dat"
 # OUTPUT_MAT = "test_matrix.txt"
 # OUTPUT_VEC = "test_vector.txt"
 
-MAX_SAMPLES=1
+MAX_SAMPLES=2
+
+TWEAK_FACTOR = 128    ## could it really be that simple?
 
 def transpose_mat(A):
 	num_rows = len(A)
@@ -128,7 +130,7 @@ def parse_input_file():
     assert(q != -1)
     for i in range(len(a_mat)):
         for j in range(len(a_mat[i])):
-            a_mat[i][j] = int(a_mat[i][j] % q)
+            a_mat[i][j] = int(TWEAK_FACTOR * a_mat[i][j] % q)
     for i in range(len(b_vec)):
         b_vec[i] = int(b_vec[i] % q)
 
