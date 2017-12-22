@@ -191,7 +191,7 @@ def main():
     TWEAK_FACTOR = int(args.t)    ## could it really be that simple?
     OUTPUT_MAT = str(args.output_matrix)
     OUTPUT_VEC = str(args.output_vector)
-    SAMPLES = int(args.s)
+    MAX_SAMPLES = int(args.s)
     create_challenge_file()
 
 parser = argparse.ArgumentParser()
