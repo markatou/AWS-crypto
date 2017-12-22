@@ -223,34 +223,34 @@ def create_secret_file():
 
 
 def main():
-    TWEAK_FACTOR = int(args.t)    ## could it really be that simple?
-    MAX_SAMPLES = int(args.s)
+    # TWEAK_FACTOR = int(args.t)    ## could it really be that simple?
+    # MAX_SAMPLES = int(args.s)
 
-    PATH = 
-    OUTPUT_MAT = str(args.output_matrix)
-    OUTPUT_VEC = str(args.output_vector)
-    S_OUTPUT = str(args.output_secret)
+    # PATH = str(args.input_file)
+    # OUTPUT_MAT = str(args.output_matrix)
+    # OUTPUT_VEC = str(args.output_vector)
+    # S_OUTPUT = str(args.output_secret)
 
     create_challenge_file()
     create_secret_file()
 
-parser = argparse.ArgumentParser()
-parser.add_argument("-t", help="The tweak factor", type=checkPos)
-parser.add_argument("-s", help="The number of samples", type=checkPos)
+# parser = argparse.ArgumentParser()
+# parser.add_argument("-t", "--tweak-factor", help="The tweak factor", type=checkPos)
+# parser.add_argument("-s", help="The number of samples", type=checkPos)
 
-parser.add_argument("im", "--input_file", 
-    help="Input challenge file. Should be challenge parser output.")
-parser.add_argument("-om", "--output_matrix", help="Output matrix file for CVP_ENUM." +
-    "Default is samples_matrix.dat")
-parser.add_argument("-ov", "--output_vector", help="Output vector file for CVP_ENUM." +
-    "Default is samples_vector.dat")
+# parser.add_argument("-im", "--input_file", 
+#     help="Input challenge file. Should be challenge parser output.")
+# parser.add_argument("-om", "--output_matrix", help="Output matrix file for CVP_ENUM." +
+#     " Default is samples_matrix.dat")
+# parser.add_argument("-ov", "--output_vector", help="Output vector file for CVP_ENUM." +
+#     " Default is samples_vector.dat")
 
-parser.add_argument("-is", "--input_secret", 
-    help="Input secret file. Should be challenge parser output.")
-parser.add_argument("-os", "--output_secret", 
-    help="Output secret file for comparison to the CVP_ENUM solution file. " +
-        "Default is samples_solution.dat")
-args = parser.parse_args()
+# parser.add_argument("-is", "--input_secret", 
+#     help="Input secret file. Should be challenge parser output.")
+# parser.add_argument("-os", "--output_secret", 
+#     help="Output secret file for comparison to the CVP_ENUM solution file. " +
+#         "Default is samples_solution.dat")
+# args = parser.parse_args()
 
 
 main()
